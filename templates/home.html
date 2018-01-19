@@ -1,0 +1,259 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+       <link rel="shortcut icon" type="image/png" href="{% static 'icon.ico'%}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BioMicroLab</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css' %">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/freelancer.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="http://10.1.10.98" ">BioMicroLab</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">DATA</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-white text-center">
+      <div class="container">
+        <!--<img class="img-fluid mb-5 d-block mx-auto" src="{% static 'img/test.png' %}" alt="">-->
+        <h1 style ="color:#128f76;" class="text-uppercase mb-0">BioMicroLab</h1>
+        <hr class="star-light">
+        
+      </div>
+    </header>
+<head>
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["snumber"].value;
+    if (isNaN(x)){
+        alert("Must only contain numbers");
+        return false;
+    }
+
+}
+</script>
+</head>
+
+<style>
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+</style>
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">DATA</h2>
+        <hr class="star-dark mb-5">   
+	<!-- Submit Button goes here-->
+<script>
+var _validFileExtensions = [".dat"];    
+function Validate(oForm) {
+    var arrInputs = oForm.getElementsByTagName("input");
+    for (var i = 0; i < arrInputs.length; i++) {
+        var oInput = arrInputs[i];
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        blnValid = true;
+                        break;
+                    }
+                }
+                
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extension is: " + _validFileExtensions.join(", "));
+                    return false;
+                }
+            }
+        }
+    }
+  
+    return true;
+}
+</script>
+<form name="myForm" onsubmit="return Validate(this)" enctype= "multipart/form-data" action="{% url 'home' %}" method="post">	
+         <div class="row"> 
+         <div class="col-lg-8 mx-auto">  
+<!--
+	<div class="control-group">
+               {%csrf_token%}
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">   
+
+		    <label for="your_name">Retrieve Data?: </label>
+		    <input id="your_name" type="text" name="your_name" placeholder="Retreive Data?">
+                    <p class="help-block text-danger"></p>
+                </div>
+              </div>
+-->
+<div class="control-group">
+ {%csrf_token%}
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label for="your_email">Email Address</label>
+                  <input class="form-control" id="your_email" name = "your_email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+<!--
+             <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label for = "number">Serial number</label>
+                  <input class="form-control" id="snumber" name="number"  placeholder="Serial Number"  type="number" data-validation-required-message="SN must be less than 10 characters" required="required" inputmode="numeric">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+
+-->
+
+             <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label for = "docfile">filename</label>
+                  <input  type="file" class="form-control" id="file" name="docfile" required="required">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+
+     <input type="submit" value="Submit"  class="btn btn-primary btn-xl"> 
+
+
+
+    </div>
+    </div>
+</form>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-primary text-white mb-0" id="about">
+      <div class="container">
+        <h2 style ="color:#128f76;" class="text-center text-uppercase">About</h2>
+        <hr class="star-light mb-5">
+        <div class="row">
+          <div class="text-center mt-4">
+            <p class="lead">From our location in northern California we design, engineer, assemble and support BioMicroLab instruments.  BioMicroLab robotics platforms are designed for compatibility within the Society of Biomolecular Screening (SBS) standards to ensure integration with automation oriented labware.  
+</p>
+          </div>
+        </div>
+       
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Location</h4>
+            <p class="lead mb-0">2500 Dean Lesher Dr # A
+              <br>Concord, CA 94520</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <ul class="list-inline mb-0">
+                           <li class="list-inline-item">
+                <a href="https://www.youtube.com/user/BioMicroLab" target="_blank"><img alt="" src="http://www.biomicrolab.com/_/rsrc/1502399853995/home/i-youTube.png" style="float:right;padding-left:10px" width="50" height="53"></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/BioMicroLab" target="_blank"><img alt="" src="http://www.biomicrolab.com/_/rsrc/1502399853657/home/i-twitter.png" style="float:right;padding-left:10px" width="50" height="53"></a>
+              </li>
+              <li class="list-inline-item">       
+            <a href="https://www.facebook.com/BioMicroLab" target="_blank"><img alt="" src="http://www.biomicrolab.com/_/rsrc/1502399853657/home/i-faceBook.png" style="float:right;padding-left:0px" width="50" height="53">
+</a>
+</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-uppercase mb-4">About BioMicroLab</h4>
+            <p class="lead mb-0">We Build Sample Management Automation & Robotics for Laboratories
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; Biomicrolab 2018</small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+ 
+
+
+    <!-- Portfolio Modals -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'js/contact_me.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/freelancer.min.js' %}"></script>
+ 
+
+  </body>
+
+</html>
