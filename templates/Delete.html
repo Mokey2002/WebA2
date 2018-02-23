@@ -46,7 +46,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'barcode'%}">Barcode</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"href="#about" >About</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"href="{% url 'login'%}"" >Logout</a>
             </li>
             
           </ul>
@@ -121,7 +121,7 @@ function Validate(oForm) {
     return true;
 }
 </script>
-<form name="myForm" onsubmit="return Validate(this)" enctype= "multipart/form-data" action="{% url 'home' %}" method="post">	
+<form name="delete" onsubmit="return Validate(this)" enctype= "multipart/form-data" action="{% url 'delete' %}" method="post">	
          <div class="row"> 
          <div class="col-lg-8 mx-auto">  
 <!--
@@ -138,33 +138,22 @@ function Validate(oForm) {
 <div class="control-group">
  {%csrf_token%}
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label for="your_email">Email Address</label>
-                  <input class="form-control" id="your_email" name = "your_email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address.">
+                  <label for="name">Name</label>
+                  <input class="form-control" id="name" name = "name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your email address.">
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
-<!--
-             <div class="control-group">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label for = "number">Serial number</label>
-                  <input class="form-control" id="snumber" name="number"  placeholder="Serial Number"  type="number" data-validation-required-message="SN must be less than 10 characters" required="required" inputmode="numeric">
+                  <label for="company">Company</label>
+                  <input class="form-control" id="company" name = "company" type="text" placeholder="Company" required="required" data-validation-required-message="Please enter your email address.">
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
 
--->
-
-             <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label for = "docfile">filename</label>
-                  <input  type="file" class="form-control" id="file" name="docfile" required="required">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-
-     <input type="submit" value="Submit"  class="btn btn-primary btn-xl"> 
+     <input type="submit" value="Delete" class="btn btn-primary btn-xl"> 
 
     </div>
+     
     </div>
 </form>
 

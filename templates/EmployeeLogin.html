@@ -3,7 +3,7 @@
 <html lang="en">
 
   <head>
-       <link rel="shortcut icon" type="image/png" href="{% static 'icon.ico'%}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'icon.ico'%}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -32,7 +32,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="{% url 'home'%}">BioMicroLab</a>
+        <a class="navbar-brand js-scroll-trigger" href="http://10.1.10.98/">BioMicroLab</a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -46,7 +46,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'barcode'%}">Barcode</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"href="#about" >About</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
             
           </ul>
@@ -63,67 +63,12 @@
         
       </div>
     </header>
-<head>
-<script>
-function validateForm() {
-    var x = document.forms["myForm"]["snumber"].value;
-    if (isNaN(x)){
-        alert("Must only contain numbers");
-        return false;
-    }
 
-}
-</script>
-</head>
-
-<style>
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-</style>
     <!-- Portfolio Grid Section -->
     <section class="portfolio" id="portfolio">
       <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">DATA</h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">Login</h2>
         <hr class="star-dark mb-5">   
-	<!-- Submit Button goes here-->
-<script>
-var _validFileExtensions = [".dat"];    
-function Validate(oForm) {
-    var arrInputs = oForm.getElementsByTagName("input");
-    for (var i = 0; i < arrInputs.length; i++) {
-        var oInput = arrInputs[i];
-        if (oInput.type == "file") {
-            var sFileName = oInput.value;
-            if (sFileName.length > 0) {
-                var blnValid = false;
-                for (var j = 0; j < _validFileExtensions.length; j++) {
-                    var sCurExtension = _validFileExtensions[j];
-                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-                        blnValid = true;
-                        break;
-                    }
-                }
-                
-                if (!blnValid) {
-                    alert("Sorry, " + sFileName + " is invalid, allowed extension is: " + _validFileExtensions.join(", "));
-                    return false;
-                }
-            }
-        }
-    }
-  
-    return true;
-}
-</script>
-<form name="myForm" onsubmit="return Validate(this)" enctype= "multipart/form-data" action="{% url 'home' %}" method="post">	
-         <div class="row"> 
-         <div class="col-lg-8 mx-auto">  
 <!--
 	<div class="control-group">
                {%csrf_token%}
@@ -135,14 +80,35 @@ function Validate(oForm) {
                 </div>
               </div>
 -->
+<form name="myForm" onsubmit="return Validate(this)" enctype= "multipart/form-data" action="{% url 'login' %}" method="post">	
 <div class="control-group">
  {%csrf_token%}
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label for="your_email">Email Address</label>
-                  <input class="form-control" id="your_email" name = "your_email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address.">
-                  <p class="help-block text-danger"></p>
+ <div class="container">
+	<div class="row">
+		 <form class="form-horizontal">
+            <fieldset>
+ 
+                  <div class="control-group">
+                    <label for="username">Username</label>
+                    <div class="controls">
+                        <input id="username" name="username" type="text" placeholder="username"
+                        class="input-xlarge">
+                        <p class="help-block"></p>
+                    </div>
                 </div>
-              </div>
+                <div class="control-group">
+                    <label for="pss"> Password</label>
+                    <div class="controls">
+                        <input id="pss" name="pss" type="password" placeholder="password"
+                        class="input-xlarge">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+               
+            </fieldset>
+        </form>
+    </div>
+
 <!--
              <div class="control-group">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -152,7 +118,7 @@ function Validate(oForm) {
                 </div>
               </div>
 
--->
+
 
              <div class="control-group">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -161,20 +127,24 @@ function Validate(oForm) {
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
-
+-->
      <input type="submit" value="Submit"  class="btn btn-primary btn-xl"> 
 
-    </div>
-    </div>
-</form>
+</div>
+</div>
 
-      </div>
-    </section>
+
+    
+   
+</form>
+          </div>
+      
+</section>
 
     <!-- About Section -->
     <section class="bg-primary text-white mb-0" id="about">
       <div class="container">
-        <h2 style ="color:#128f76;" class="text-center text-uppercase">About</h2>
+        <h2 style ="color:#128f76;"class="text-center text-uppercase ">About</h2>
         <hr class="star-light mb-5">
         <div class="row">
           <div class="text-center mt-4">
@@ -185,10 +155,7 @@ function Validate(oForm) {
        
       </div>
     </section>
-
-    <!-- Contact Section -->
     
-
     <!-- Footer -->
     <footer class="footer text-center">
       <div class="container">
@@ -201,7 +168,7 @@ function Validate(oForm) {
           <div class="col-md-4 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Around the Web</h4>
             <ul class="list-inline mb-0">
-                           <li class="list-inline-item">
+              <li class="list-inline-item">
                 <a href="https://www.youtube.com/user/BioMicroLab" target="_blank"><img alt="" src="http://www.biomicrolab.com/_/rsrc/1502399853995/home/i-youTube.png" style="float:right;padding-left:10px" width="50" height="53"></a>
               </li>
               <li class="list-inline-item">
@@ -211,6 +178,7 @@ function Validate(oForm) {
             <a href="https://www.facebook.com/BioMicroLab" target="_blank"><img alt="" src="http://www.biomicrolab.com/_/rsrc/1502399853657/home/i-faceBook.png" style="float:right;padding-left:0px" width="50" height="53">
 </a>
 </li>
+
             </ul>
           </div>
           <div class="col-md-4">
@@ -236,7 +204,6 @@ function Validate(oForm) {
     </div>
  
 
-
     <!-- Portfolio Modals -->
 
     <!-- Bootstrap core JavaScript -->
@@ -253,7 +220,6 @@ function Validate(oForm) {
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'js/freelancer.min.js' %}"></script>
- 
 
   </body>
 

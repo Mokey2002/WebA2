@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse
-from .form import CheckButton
+from .form import CheckButton, BarcodeInfo, Employee_Info, Delete_Data, Barcode_Process
 from django.core.files import File
 import threading
 import socket
@@ -11,14 +11,23 @@ import sys
 import time
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
+from .models import users_data, employee
+import datetime
+from django.contrib.auth import authenticate, login, logout
+import os
 
-path = '/home/web/WebApp/testwebapp/datafile.txt'
+
+path = '/home/web/WebApp2/testwebapp/datafile.txt'
+path2 = '/home/web/WebApp2/testwebapp/barcodefile.txt'
 
 HOST = socket.gethostbyname("10.1.10.27")    # The remote host
 PORT = 8001             # The same port as used by the server
 maxconnections = 1
 sem = threading.Semaphore()
 # Create your views here.
+global exists 
+#exists = None
+
 
 def handle_uploaded_file(f):
     with open('uploaded.txt', 'wb+') as destination:
@@ -103,9 +112,7 @@ def HomePageView(request):
             #else:
                 
                 #return render(request,'thankyou.html')
-        
-        
-        
+
         #sem.release()    
 
     
@@ -113,5 +120,123 @@ def HomePageView(request):
 
 #template_name='home.html'
 
+def Barcode(request):
+    if request.method == 'POST':
+        form = BarcodeInfo(request.POST)#, request.FILES)
+     
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['your_email']
+            company = form.cleaned_data['company']
+            time  = str(datetime.datetime.now())
+            new_user = users_data(email = email, name = name, company = company, date = time[:10])
+            new_user.save()     
+            
+            return render(request,'BarcodeProcess.html')
+        else:
+            return render(request,'BarcodeInfo.html')
+
+    return render(request,'BarcodeInfo.html')
 
 
+
+def BarcodeProcess(request):
+
+    if request.method == 'POST':
+
+        form = Barcode_Process(request.POST, request.FILES)
+
+        if form.is_valid():
+            labware = form.cleaned_data['labware']
+            docfile  = request.FILES['docfile']
+           #os.system("bash test.sh -v /home/web/Desktop/bb.JPG")
+
+            return render(request, 'thankyou.html')
+        else:
+            return render(request, 'home.html')
+
+    return render(request, 'BarcodeInfo.html')
+
+
+def Login(request):
+    
+
+
+    if request.user.is_authenticated:
+        info = users_data.objects.all()
+        user = {'action': "Display all", 'data':info} 
+        return render(request,'EmployeeHome.html', user) 
+
+
+    if request.method == 'POST':
+        form = Employee_Info(request.POST)#, request.FILES)
+        
+        
+        if form.is_valid():            
+            name = form.cleaned_data['username']
+            pwd  = form.cleaned_data['pss']
+           
+            exists = authenticate(request, username = name, password = pwd)
+                
+                
+            if exists:
+                login(request, exists)
+                info = users_data.objects.all()
+                user = {'action': "Display all", 'data':info} 
+                
+                return render(request,'EmployeeHome.html', user) 
+            else:
+
+                return render(request,'EmployeeLogin.html')
+
+            return render(request,'BarcodeProcess.html')
+        else:
+            return render(request,'EmployeeLogin.html')
+
+    return render(request,'EmployeeLogin.html')
+
+
+def EmployeeHome(request):
+
+    if 'data' in request.POST:
+ 
+        return render(request, 'Delete.html') 
+
+    else:
+        
+        return render(request,'EmployeeLogin.html')
+
+
+
+def DeleteData(request):
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = Delete_Data(request.POST)
+            
+            if form.is_valid():
+                name_user = form.cleaned_data['name']
+                company_user = form.cleaned_data['company']
+                info = users_data.objects.filter(name=name_user).filter(company=company_user)
+                info.delete()
+                data = users_data.objects.all()
+                user = {'action': "Display all", 'data':data} 
+
+  
+                return render(request,'EmployeeHome.html', user) 
+            else:
+                 return render(request, 'BarcodeInfo.html') 
+        return render(request, 'Delete.html')
+
+    else:
+        
+        return render(request,'EmployeeLogin.html')
+
+def Logout(request):
+
+    logout(request)
+
+    return render(request,'EmployeeLogin.html')
+
+    
+    
